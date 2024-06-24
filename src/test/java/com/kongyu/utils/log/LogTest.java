@@ -1,5 +1,6 @@
-package com.kongyu.utils;
+package com.kongyu.utils.log;
 
+import com.kongyu.utils.ListUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class LogUtilsTest {
-    Logger logger = LoggerFactory.getLogger(LogUtilsTest.class);
+public class LogTest {
+    Logger logger = LoggerFactory.getLogger(LogTest.class);
 
     @Test
     public void loggerTest() {
-        LogUtils.ProgressLogger progress = LogUtils.getProgress(logger, 1000, 0);
+        ProgressLogger progress = new ProgressLogger(logger, 1000, 0);
         for (int i = 0; i < 1000; i++) {
             progress.increment();
         }
@@ -25,7 +26,7 @@ public class LogUtilsTest {
         for (int i = 0; i < 1000; i++) {
             data.add(i);
         }
-        LogUtils.ProgressLogger progress = LogUtils.getProgress(logger, data.size(), 500);
+        ProgressLogger progress = new ProgressLogger(logger, data.size(), 500);
         for (Integer datum : data) {
             progress.increment();
             if (datum % 100 == 0) {
@@ -46,7 +47,7 @@ public class LogUtilsTest {
         for (int i = 0; i < 1000; i++) {
             data.add(i);
         }
-        LogUtils.ProgressLogger progress = LogUtils.getProgress(logger, data.size(), 500);
+        ProgressLogger progress = new ProgressLogger(logger, data.size(), 500);
 
         List<CompletableFuture<Void>> futures = new ArrayList<>();
         ListUtils.longitudinalSegmented(10, data).forEach(sublist -> futures.add(CompletableFuture.runAsync(() -> {
