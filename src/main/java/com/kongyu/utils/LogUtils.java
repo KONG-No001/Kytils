@@ -5,25 +5,48 @@ import org.slf4j.Logger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * @author Luojun
+ * @author Kongyu
  * @version v1.0.0
  * @since 2024/6/22
  */
 public class LogUtils {
 
+    /**
+     * 获取进度条日志
+     *
+     * @param logger 日志
+     * @param total  总数
+     * @param cd     时间间隔
+     * @return 进度条日志
+     * @see ProgressLogger
+     */
     public static ProgressLogger getProgress(Logger logger, int total, long cd) {
         return new ProgressLogger(logger, total, cd);
     }
 
     /**
-     * 进度条日志
+     * <h2>进度条日志</h2>
+     * <p>一个日志对象，输出日志时将附带进度指示。并且，如果设置了冷却时间，increment将会间隔的输出日志。</p>
+     * <p>该日志对象是线程安全的。</p>
+     * <br/>
+     * <h3>用途：</h3>
+     * <p>用于输出附带进度指示且输出频率受控的日志。</p>
+     * <br/>
+     * <h3>应用场景：</h3>
+     * <ul>
+     *     <li><b>显示进度：</b>需要显示当前进度和总进度时</li>
+     *     <li><b>显示位置：</b>当需要特别提醒时，可以根据进度位置快速找到对象</li>
+     * </ul>
+     * <br/>
+     *
+     * @see LogUtils#getProgress(Logger, int, long)
      */
     public static class ProgressLogger {
-        Logger logger;
-        long total;
-        long cd;
-        AtomicLong count = new AtomicLong(0);
-        AtomicLong millis = new AtomicLong(0);
+        private final Logger logger;
+        private final long total;
+        private final long cd;
+        private final AtomicLong count = new AtomicLong(0);
+        private final AtomicLong millis = new AtomicLong(0);
 
         public ProgressLogger(Logger logger, long total, long cd) {
             this.logger = logger;
