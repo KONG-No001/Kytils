@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  * @version v1.0.0
  * @since 2024/6/22
  */
-public class ListUtils {
+public class SegmentedUtils {
 
     /**
      * <h2>横向分段</h2>
