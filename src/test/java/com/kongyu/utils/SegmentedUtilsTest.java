@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListUtilsTest {
+public class SegmentedUtilsTest {
 
     @Test
     public void transverseSegmented() {
@@ -13,7 +13,7 @@ public class ListUtilsTest {
         for (int i = 0; i < 10; i++) {
             list.add(i);
         }
-        ListUtils.transverseSegmented(9, list).forEach(System.out::println);
+        SegmentedUtils.transverseSegmented(9, list).forEach(System.out::println);
     }
 
     @Test
@@ -22,6 +22,6 @@ public class ListUtilsTest {
         for (int i = 0; i < 10; i++) {
             list.add(i);
         }
-        ListUtils.longitudinalSegmented(9, list).forEach(System.out::println);
+        SegmentedUtils.longitudinalSegmented(9, list).forEach(System.out::println);
     }
 }

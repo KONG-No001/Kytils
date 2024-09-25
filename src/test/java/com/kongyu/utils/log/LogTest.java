@@ -1,6 +1,6 @@
 package com.kongyu.utils.log;
 
-import com.kongyu.utils.ListUtils;
+import com.kongyu.utils.SegmentedUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class LogTest {
         ProgressLogger progress = new ProgressLogger(logger, data.size(), 500);
 
         List<CompletableFuture<Void>> futures = new ArrayList<>();
-        ListUtils.longitudinalSegmented(10, data).forEach(sublist -> futures.add(CompletableFuture.runAsync(() -> {
+        SegmentedUtils.longitudinalSegmented(10, data).forEach(sublist -> futures.add(CompletableFuture.runAsync(() -> {
             for (Integer integer : sublist) {
                 progress.increment("increment: {}", integer);
                 try {
