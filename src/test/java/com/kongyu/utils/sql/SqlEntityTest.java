@@ -1,5 +1,6 @@
 package com.kongyu.utils.sql;
 
+import com.kongyu.utils.sql.query.QuerySqlEntity;
 import org.junit.Test;
 
 /**
