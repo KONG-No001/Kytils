@@ -13,16 +13,7 @@ import java.util.Map;
  * @version v1.0.0
  * @since 2025/4/28
  */
-public class BeanUtils implements IBeanUtils {
-    @Override
-    public PropertyDescriptor[] getPropertyDescriptors(Class<?> clazz) {
-        return new PropertyDescriptor[0]; // TODO: 需要硬编码
-    }
-
-    @Override
-    public PropertyDescriptor getPropertyDescriptor(Class<?> clazz, String propertyName) {
-        return null; // TODO: 需要硬编码
-    }
+public abstract class BeanUtils implements IBeanUtils {
 
     @Override
     public void setProperty(Object bean, String property, Object value) {
