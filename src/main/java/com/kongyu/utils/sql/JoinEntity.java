@@ -1,5 +1,7 @@
 package com.kongyu.utils.sql;
 
+import com.kongyu.utils.sql.query.QuerySqlEntity;
+
 import java.util.Collections;
 
 /**
@@ -13,14 +15,14 @@ public class JoinEntity implements SqlEntity {
     private final QuerySqlEntity entity;
     private final ConditionEntity where;
 
-    JoinEntity(String type, String table, ConditionEntity where) {
+    public JoinEntity(String type, String table, ConditionEntity where) {
         this.type = type;
         this.table = table;
         this.entity = null;
         this.where = where;
     }
 
-    JoinEntity(String type, String table, QuerySqlEntity entity, ConditionEntity where) {
+    public JoinEntity(String type, String table, QuerySqlEntity entity, ConditionEntity where) {
         this.type = type;
         this.table = table;
         this.entity = entity;
@@ -35,7 +37,8 @@ public class JoinEntity implements SqlEntity {
 
         if (entity == null) {
             return sb.append(type).append(" ").append(table).append(" ").append(onSql).toString();
-        } else {
+        }
+        else {
             return sb.append(type).append(" ( ").append(entity.sql()).append(" ) ").append(table).append(" ").append(onSql).toString();
         }
     }

@@ -1,5 +1,7 @@
 package com.kongyu.utils.sql;
 
+import com.kongyu.utils.sql.query.QuerySqlEntity;
+
 /**
  * @author Kongyu
  * @version v1.0.0
@@ -10,19 +12,19 @@ public class FromEntity implements SqlEntity {
     private final String sql;
     private final QuerySqlEntity entity;
 
-    FromEntity(String table) {
+    public FromEntity(String table) {
         this.table = table;
         this.sql = null;
         this.entity = null;
     }
 
-     FromEntity(String table, QuerySqlEntity entity) {
+    public FromEntity(String table, QuerySqlEntity entity) {
         this.table = table;
         this.sql = null;
         this.entity = entity;
     }
 
-     FromEntity(String table, String sql) {
+    public FromEntity(String table, String sql) {
         this.table = table;
         this.sql = sql;
         this.entity = null;
@@ -30,10 +32,11 @@ public class FromEntity implements SqlEntity {
 
     @Override
     public String sql() {
-        if (entity != null) return "( " + entity.sql() + " ) " + table;
+        if (entity != null) { return "( " + entity.sql() + " ) " + table; }
         if (sql != null) {
             return "( " + sql + " ) " + table;
-        } else {
+        }
+        else {
             return table;
         }
     }

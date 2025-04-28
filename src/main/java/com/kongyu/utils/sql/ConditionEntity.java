@@ -16,20 +16,20 @@ public class ConditionEntity implements SqlEntity {
     private final String expression;
     private final List<ConditionEntity> conditions;
 
-    ConditionEntity(String logicalOperator, String expression) {
+    public ConditionEntity(String logicalOperator, String expression) {
         this.logicalOperator = logicalOperator;
         this.expression = expression;
         this.conditions = new ArrayList<>();
     }
 
-    ConditionEntity(String logicalOperator, List<ConditionEntity> conditions) {
+    public ConditionEntity(String logicalOperator, List<ConditionEntity> conditions) {
         this.logicalOperator = logicalOperator;
         this.expression = null;
         this.conditions = conditions;
     }
 
     public static String buildConditionClause(List<ConditionEntity> conditions) {
-        if (conditions == null || conditions.isEmpty()) return "";
+        if (conditions == null || conditions.isEmpty()) { return ""; }
 
         StringBuilder sb = new StringBuilder();
         boolean first = true;
@@ -106,7 +106,7 @@ public class ConditionEntity implements SqlEntity {
         }
 
         // 如果 express 为 null 或空，则返回 null
-        if (express == null || express.isEmpty()) return null;
+        if (express == null || express.isEmpty()) { return null; }
 
         // 生成并返回最终的 SQL 字符串
         return logicalOperator + " ( " + express + " )";

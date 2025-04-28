@@ -8,7 +8,7 @@ package com.kongyu.utils.sql;
 public class GroupByEntity implements SqlEntity {
     private final String express;
 
-    GroupByEntity(String express) {
+    public GroupByEntity(String express) {
         this.express = express;
     }
 

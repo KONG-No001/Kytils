@@ -8,7 +8,7 @@ package com.kongyu.utils.sql;
 public class SelectEntity implements SqlEntity {
     private final String express;
 
-    SelectEntity(String express) {
+    public SelectEntity(String express) {
         this.express = express;
     }
 

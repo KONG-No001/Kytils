@@ -9,12 +9,12 @@ public class OrderByEntity implements SqlEntity {
     private final String express;
     private final String direction;
 
-    OrderByEntity(String express) {
+    public OrderByEntity(String express) {
         this.express = express;
         this.direction = null;
     }
 
-    OrderByEntity(String express, String direction) {
+    public OrderByEntity(String express, String direction) {
         this.express = express;
         this.direction = direction;
     }

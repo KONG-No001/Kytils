@@ -1,4 +1,6 @@
-package com.kongyu.utils.sql;
+package com.kongyu.utils.sql.query;
+
+import com.kongyu.utils.sql.SqlEntity;
 
 import java.util.ArrayList;
 import java.util.List;
