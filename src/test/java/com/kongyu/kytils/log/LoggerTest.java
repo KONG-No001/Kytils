@@ -1,6 +1,5 @@
 package com.kongyu.kytils.log;
 
-import com.kongyu.App;
 import com.kongyu.kytils.SegmentedUtils;
 import com.kongyu.kytils.log.loggerFactory.MyLoggerFactory;
 import com.kongyu.kytils.log.progress.IProgressLogger;
@@ -20,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
  * @since 2025/4/29
  */
 public class LoggerTest {
-    static Logger logger = LoggerFactory.getLogger(App.class);
+    static Logger logger = LoggerFactory.getLogger(LoggerTest.class);
 
     @Before
     public void before() {
@@ -91,6 +90,7 @@ public class LoggerTest {
 
     @Test
     public void loggerTest3() {
+        logger.info("loggerTest3 测试开始");
         int length = 100;
         int cd = 500;
         List<Integer> data = new ArrayList<>();
