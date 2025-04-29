@@ -62,11 +62,10 @@ public class NumericalConverter implements INumericalConverter {
             if (remainder == 0 && offset > 0) {
                 remainder = cardinality + offset;
             }
-            String key = mapper2.getOrDefault(remainder, null);
-            if (key == null) {
-                throw new NumericalConverterException("无效的余数: " + remainder);
+            String key = mapper2.get(remainder);
+            if (key != null) {
+                sb.append(key);
             }
-            sb.append(key);
 
             decimal /= cardinality;
         }
@@ -78,11 +77,10 @@ public class NumericalConverter implements INumericalConverter {
             if (length < size) {
                 StringBuilder sb2 = new StringBuilder();
                 for (int j = 0; j < size - length; j++) {
-                    String key = mapper2.getOrDefault(0L, null);
-                    if (key == null) {
-                        throw new NumericalConverterException("无效的余数: " + 0L);
+                    String key = mapper2.get(0L);
+                    if (key != null) {
+                        sb2.append(key);
                     }
-                    sb2.append(key);
                 }
                 sb2.append(string);
                 string = sb2.toString();
