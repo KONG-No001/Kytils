@@ -1,46 +1,56 @@
-package com.kongyu.utils.log;
+package com.kongyu.utils.log.progress;
 
-import org.slf4j.Logger;
+
+import com.kongyu.utils.log.ILogger;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * <h2>进度条日志</h2>
- * <p>一个日志对象，输出日志时将附带进度指示。并且，如果设置了冷却时间，increment将会间隔的输出日志。</p>
- * <p>该日志对象是线程安全的。</p>
- * <br/>
- * <h3>用途：</h3>
- * <p>用于输出附带进度指示且输出频率受控的日志。</p>
- * <br/>
- * <h3>应用场景：</h3>
- * <ul>
- *     <li><b>显示进度：</b>需要显示当前进度和总进度时</li>
- *     <li><b>显示位置：</b>当需要特别提醒时，可以根据进度位置快速找到对象</li>
- * </ul>
- * <br/>
- *
  * @author Kongyu
  * @version v1.0.0
- * @since 2024/6/24
+ * @since 2025/4/29
  */
-public class ProgressLogger {
+public class ProgressLogger implements IProgressLogger {
 
-    private final Logger logger;
+    private final ILogger logger;
     private final long total;
     private final long cd;
     private final AtomicLong count = new AtomicLong(0);
     private final AtomicLong millis = new AtomicLong(0);
 
-    public ProgressLogger(Logger logger, long total, long cd) {
+    public ProgressLogger(ILogger logger, long total, long cd) {
         this.logger = logger;
         this.total = total;
         this.cd = cd;
     }
 
+
+    @Override
+    public void debug(String format, Object... arguments) {
+        logger.debug(getFormat(format), getObjects(arguments));
+    }
+
+    @Override
+    public void info(String format, Object... arguments) {
+        logger.info(getFormat(format), getObjects(arguments));
+    }
+
+    @Override
+    public void warn(String format, Object... arguments) {
+        logger.warn(getFormat(format), getObjects(arguments));
+    }
+
+    @Override
+    public void error(String format, Object... arguments) {
+        logger.error(getFormat(format), getObjects(arguments));
+    }
+
+    @Override
     public void increment() {
         increment(null, (Object[]) null);
     }
 
+    @Override
     public void increment(String format, Object... obj) {
         count.incrementAndGet();
 
@@ -52,25 +62,10 @@ public class ProgressLogger {
                     info(format, obj);
                 }
             }
-        } else {
+        }
+        else {
             info(format, obj);
         }
-    }
-
-    public void debug(String format, Object... arguments) {
-        logger.debug(getFormat(format), getObjects(arguments));
-    }
-
-    public void info(String format, Object... arguments) {
-        logger.info(getFormat(format), getObjects(arguments));
-    }
-
-    public void warn(String format, Object... arguments) {
-        logger.warn(getFormat(format), getObjects(arguments));
-    }
-
-    public void error(String format, Object... arguments) {
-        logger.error(getFormat(format), getObjects(arguments));
     }
 
     private String getFormat(String format) {
