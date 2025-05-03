@@ -1,5 +1,9 @@
 package link.kongyu.kytils.bean;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
 import java.beans.PropertyDescriptor;
+import java.util.Map;
 
 public class BeanUtilsTest {
 
@@ -42,16 +47,34 @@ public class BeanUtilsTest {
 
     @Test
     public void test() {
+        People people = new People();
 
+        myBeanUtils.setProperty(people, "name", "zhang3");
+        myBeanUtils.setProperty(people, "age", 18);
+        myBeanUtils.setProperty(people, "sex", 1);
+
+        logger.info("People: {}", people);
+
+        Map<String, Object> toMap = myBeanUtils.beanToMap(people);
+
+        logger.info("toMap: {}", toMap);
+
+        Student student = myBeanUtils.mapToBean(toMap, Student.class);
+        student.setClsNo("C10086");
+
+        logger.info("toBean: {}", student);
     }
 
+    @Data
     public static class People {
-        private String name;
-        private Integer age;
-        private Integer sex;
+        protected String name;
+        protected Integer age;
+        protected Integer sex;
     }
 
+    @EqualsAndHashCode(callSuper = true)
+    @Data
     public static class Student extends People {
-
+        private String clsNo;
     }
 }
