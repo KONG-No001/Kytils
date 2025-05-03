@@ -1,9 +1,7 @@
 package link.kongyu.kytils.bean;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import link.kongyu.kytils.vo.People;
+import link.kongyu.kytils.vo.Student;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,18 +61,5 @@ public class BeanUtilsTest {
         student.setClsNo("C10086");
 
         logger.info("toBean: {}", student);
-    }
-
-    @Data
-    public static class People {
-        protected String name;
-        protected Integer age;
-        protected Integer sex;
-    }
-
-    @EqualsAndHashCode(callSuper = true)
-    @Data
-    public static class Student extends People {
-        private String clsNo;
     }
 }
