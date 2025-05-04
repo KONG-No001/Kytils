@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ObjectUtils {
 
-    public static boolean isEmpty(Object obj) {
+    public static boolean isNullOrEmpty(Object obj) {
         if (obj == null) {
             return true;
         }
