@@ -60,24 +60,34 @@ public class ConditionEntity implements SqlEntity {
         return sb.toString();
     }
 
-    public ConditionEntity where(String express) {
-        conditions.add(new ConditionEntity("AND", express));
-        return this;
+    public ConditionEntity and(String express) {
+        return this.addCondition("AND", express);
     }
 
-    public ConditionEntity where(String logicalOperator, String express) {
+    public ConditionEntity or(String express) {
+        return this.addCondition("OR", express);
+    }
+
+    public ConditionEntity addCondition(String logicalOperator, String express) {
         conditions.add(new ConditionEntity(logicalOperator, express));
         return this;
     }
 
-    public ConditionEntity where(ConditionEntity entity) {
+    public ConditionEntity addCondition(ConditionEntity entity) {
         conditions.add(entity);
         return this;
     }
 
-    public ConditionEntity where(String logicalOperator, Function<ConditionEntity, ConditionEntity> entityFun) {
-        where(entityFun.apply(new ConditionEntity(logicalOperator, "")));
-        return this;
+    public ConditionEntity or(Function<ConditionEntity, ConditionEntity> entityFun) {
+        return this.addCondition("OR", entityFun);
+    }
+
+    public ConditionEntity not(Function<ConditionEntity, ConditionEntity> entityFun) {
+        return this.addCondition("NOT", entityFun);
+    }
+
+    public ConditionEntity addCondition(String logicalOperator, Function<ConditionEntity, ConditionEntity> entityFun) {
+        return this.addCondition(entityFun.apply(new ConditionEntity(logicalOperator, "")));
     }
 
     public String getLogicalOperator() {
