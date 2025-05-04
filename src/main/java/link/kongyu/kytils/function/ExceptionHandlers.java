@@ -22,7 +22,7 @@ public class ExceptionHandlers {
         catch (Exception cause) {
             RuntimeException ex = exceptionWrapper.apply(cause);
             if (ex == null) {
-                ex = new RuntimeException("Wrapped exception is null", cause);
+                ex = new RuntimeException("空的异常包装", cause);
             }
             throw ex;
         }
