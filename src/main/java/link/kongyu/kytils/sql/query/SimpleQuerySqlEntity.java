@@ -120,7 +120,7 @@ public class SimpleQuerySqlEntity implements SqlEntity {
 
         // HAVING clause
         if (!havings.isEmpty()) {
-            String s = ConditionEntity.buildConditionClause(wheres);
+            String s = ConditionEntity.buildConditionClause(havings);
             if (!s.isEmpty()) {
                 sb.append("HAVING ").append(s).append(" ");
             }

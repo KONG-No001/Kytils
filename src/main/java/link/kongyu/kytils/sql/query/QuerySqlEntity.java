@@ -203,7 +203,7 @@ public class QuerySqlEntity implements SqlEntity {
         return this;
     }
 
-    // ==================  orderBy  ==================
+    // ==================  union  ==================
 
     public QuerySqlEntity union(String union) {
         this.currentEntity.setUnion(union.trim());
