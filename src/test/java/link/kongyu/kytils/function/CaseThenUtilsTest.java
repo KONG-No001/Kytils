@@ -24,14 +24,14 @@ public class CaseThenUtilsTest {
     @Test
     public void testNotNull() {
         People people = new People();
-        CaseThenUtils.notNull(people, t -> {
+        WhenUtils.notNull(people, t -> {
             logger.info("People: {}", t.toString());
         });
 
-        Student student = CaseThenUtils.notNull(people, t -> {
+        Student student = WhenUtils.notNull(people, t -> {
             logger.info("初始化 student");
             return new Student();
-        });
+        }).orElse(null);
 
         logger.info("Student: {}", student);
     }
