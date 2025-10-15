@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>6.1.6</version>
+            <version>5.2.12.RELEASE</version>
             <scope>test</scope>
         </dependency>
 
