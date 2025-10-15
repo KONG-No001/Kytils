@@ -37,7 +37,6 @@ public class QuerySqlEntity implements SqlEntity {
         return this;
     }
 
-
     public QuerySqlEntity select(String express) {
         this.currentEntity.getSelects().add(new SelectEntity(express));
         return this;
@@ -103,6 +102,24 @@ public class QuerySqlEntity implements SqlEntity {
 
     public QuerySqlEntity innerJoin(String table, String on, Function<QuerySqlEntity, QuerySqlEntity> entityFun) {
         return join("INNER JOIN", table, on, entityFun);
+    }
+
+    // ==================  leftJoin  ==================
+
+    public QuerySqlEntity leftJoin(String table, String on) {
+        return join("LEFT JOIN", table, on);
+    }
+
+    public QuerySqlEntity leftJoin(String table, ConditionEntity entity) {
+        return join("LEFT JOIN", table, entity);
+    }
+
+    public QuerySqlEntity leftJoin(String table, Function<ConditionEntity, ConditionEntity> entityFun) {
+        return join("LEFT JOIN", table, entityFun);
+    }
+
+    public QuerySqlEntity leftJoin(String table, String on, Function<QuerySqlEntity, QuerySqlEntity> entityFun) {
+        return join("LEFT JOIN", table, on, entityFun);
     }
 
     // ==================  straightJoin  ==================
@@ -202,6 +219,8 @@ public class QuerySqlEntity implements SqlEntity {
         return this;
     }
 
+    // ==================  limit  ==================
+
     public QuerySqlEntity limit(String limit) {
         this.currentEntity.setLimit(limit);
         return this;
@@ -227,6 +246,8 @@ public class QuerySqlEntity implements SqlEntity {
         this.sqlEntity.entities.addAll(entity.sqlEntity.entities);
         return this;
     }
+
+    // ==================  sql  ==================
 
     @Override
     public String sql() {
