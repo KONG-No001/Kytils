@@ -164,6 +164,6 @@ public class SimpleQuerySqlEntity implements SqlEntity {
             sb.append(union).append(" ");
         }
 
-        return null;
+        return sb;
     }
 }

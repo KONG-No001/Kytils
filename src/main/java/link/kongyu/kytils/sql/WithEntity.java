@@ -41,7 +41,7 @@ public class WithEntity implements SqlEntity {
     public StringBuilder sql(StringBuilder sb) {
         sb.append("WITH ").append(table).append(" AS ");
         if (entity != null) {
-            sb.append("( ").append(entity.sql(sb)).append(" ) ");
+            sb.append("( ").append(entity.sql()).append(" ) ");
         }
         else {
             sb.append("( ").append(sql).append(" ) ");
