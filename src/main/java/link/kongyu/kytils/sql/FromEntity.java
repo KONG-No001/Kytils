@@ -32,12 +32,20 @@ public class FromEntity implements SqlEntity {
 
     @Override
     public String sql() {
-        if (entity != null) { return "( " + entity.sql() + " ) " + table; }
+        return sql(new StringBuilder()).toString();
+    }
+
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
+        if (entity != null) {
+            return sb.append("( ").append(entity.sql()).append(" ) ").append(table);
+        }
         if (sql != null) {
-            return "( " + sql + " ) " + table;
+            return sb.append("( ").append(sql).append(" ) ").append(table);
         }
         else {
-            return table;
+            return sb.append(table);
         }
+
     }
 }

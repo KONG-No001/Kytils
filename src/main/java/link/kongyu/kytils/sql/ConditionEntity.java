@@ -107,6 +107,11 @@ public class ConditionEntity implements SqlEntity {
      */
     @Override
     public String sql() {
+        return sql(new StringBuilder()).toString();
+    }
+
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
         String logicalOperator = this.logicalOperator == null ? "AND" : this.logicalOperator;
         String express = this.expression;
 
@@ -116,9 +121,9 @@ public class ConditionEntity implements SqlEntity {
         }
 
         // 如果 express 为 null 或空，则返回 null
-        if (express == null || express.isEmpty()) { return null; }
+        if (express == null || express.isEmpty()) { return sb; }
 
         // 生成并返回最终的 SQL 字符串
-        return logicalOperator + " ( " + express + " )";
+        return sb.append(logicalOperator).append(" ( ").append(express).append(" )");
     }
 }

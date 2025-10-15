@@ -15,10 +15,14 @@ public class UnionQuerySqlEntity implements SqlEntity {
 
     @Override
     public String sql() {
-        StringBuilder sb = new StringBuilder();
+        return sql(new StringBuilder()).toString();
+    }
+
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
         for (SqlEntity entity : entities) {
             sb.append(entity.sql());
         }
-        return sb.toString();
+        return sb;
     }
 }
