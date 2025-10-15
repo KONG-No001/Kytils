@@ -16,4 +16,9 @@ public class GroupByEntity implements SqlEntity {
     public String sql() {
         return express;
     }
+
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
+        return sb.append(express);
+    }
 }

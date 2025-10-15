@@ -19,6 +19,15 @@ public class QuerySqlEntity implements SqlEntity {
     }
 
 
+    // ==================  with  ==================
+
+    public QuerySqlEntity with(String table, Function<QuerySqlEntity, QuerySqlEntity> entityFun) {
+        this.currentEntity.getWiths().add(new WithEntity(table, entityFun.apply(new QuerySqlEntity())));
+        return this;
+    }
+
+    // ==================  select  ==================
+
     public QuerySqlEntity distinct() {
         return this.distinct(true);
     }
@@ -221,6 +230,11 @@ public class QuerySqlEntity implements SqlEntity {
 
     @Override
     public String sql() {
-        return sqlEntity.sql();
+        return sql(new StringBuilder()).toString();
+    }
+
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
+        return sqlEntity.sql(sb);
     }
 }

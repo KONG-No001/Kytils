@@ -21,10 +21,16 @@ public class OrderByEntity implements SqlEntity {
 
     @Override
     public String sql() {
+        return sql(new StringBuilder()).toString();
+    }
+
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
         if (direction == null) {
-            return express;
-        } else {
-            return express + " " + direction;
+            return sb.append(express);
+        }
+        else {
+            return sb.append(express).append(" ").append(direction);
         }
     }
 }

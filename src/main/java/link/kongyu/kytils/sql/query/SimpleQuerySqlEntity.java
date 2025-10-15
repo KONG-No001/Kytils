@@ -10,6 +10,7 @@ import java.util.LinkedList;
  * @since 2024/6/23
  */
 public class SimpleQuerySqlEntity implements SqlEntity {
+    private final LinkedList<WithEntity> withs = new LinkedList<>();
     private final LinkedList<SelectEntity> selects = new LinkedList<>();
     private final LinkedList<FromEntity> froms = new LinkedList<>();
     private final LinkedList<JoinEntity> joins = new LinkedList<>();
@@ -20,6 +21,10 @@ public class SimpleQuerySqlEntity implements SqlEntity {
     private boolean distinct;
     private String limit;
     private String union;
+
+    public LinkedList<WithEntity> getWiths() {
+        return withs;
+    }
 
     public LinkedList<SelectEntity> getSelects() {
         return selects;
@@ -63,14 +68,25 @@ public class SimpleQuerySqlEntity implements SqlEntity {
 
     @Override
     public String sql() {
-        StringBuilder sb = new StringBuilder();
+        return sql(new StringBuilder()).toString();
+    }
+
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
+
+        // WITH clause
+        if (!withs.isEmpty()) {
+            for (WithEntity with : withs) {
+                with.sql(sb);
+            }
+        }
 
         // SELECT clause
         if (!selects.isEmpty()) {
             sb.append("SELECT ");
-            if (distinct) sb.append("DISTINCT ");
+            if (distinct) { sb.append("DISTINCT "); }
             for (SelectEntity select : selects) {
-                sb.append(select.sql());
+                select.sql(sb);
                 if (selects.indexOf(select) < selects.size() - 1) {
                     sb.append(", ");
                 }
@@ -82,7 +98,7 @@ public class SimpleQuerySqlEntity implements SqlEntity {
         if (!froms.isEmpty()) {
             sb.append("FROM ");
             for (FromEntity from : froms) {
-                sb.append(from.sql());
+                from.sql(sb);
                 if (froms.indexOf(from) < froms.size() - 1) {
                     sb.append(", ");
                 }
@@ -93,7 +109,7 @@ public class SimpleQuerySqlEntity implements SqlEntity {
         // JOIN clause
         if (!joins.isEmpty()) {
             for (JoinEntity join : joins) {
-                sb.append(join.sql()).append(" ");
+                join.sql(sb);
             }
         }
 
@@ -110,7 +126,7 @@ public class SimpleQuerySqlEntity implements SqlEntity {
         if (!groupbys.isEmpty()) {
             sb.append("GROUP BY ");
             for (GroupByEntity groupby : groupbys) {
-                sb.append(groupby.sql());
+                groupby.sql(sb);
                 if (groupbys.indexOf(groupby) < groupbys.size() - 1) {
                     sb.append(", ");
                 }
@@ -130,7 +146,7 @@ public class SimpleQuerySqlEntity implements SqlEntity {
         if (!orderbys.isEmpty()) {
             sb.append("ORDER BY ");
             for (OrderByEntity orderby : orderbys) {
-                sb.append(orderby.sql());
+                orderby.sql(sb);
                 if (orderbys.indexOf(orderby) < orderbys.size() - 1) {
                     sb.append(", ");
                 }
@@ -148,6 +164,6 @@ public class SimpleQuerySqlEntity implements SqlEntity {
             sb.append(union).append(" ");
         }
 
-        return sb.toString();
+        return null;
     }
 }

@@ -1,5 +1,7 @@
 package link.kongyu.kytils.sql;
 
+import java.util.List;
+
 /**
  * @author Kongyu
  * @version v1.0.0
@@ -15,5 +17,10 @@ public class SelectEntity implements SqlEntity {
     @Override
     public String sql() {
         return express;
+    }
+
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
+        return sb.append(express);
     }
 }

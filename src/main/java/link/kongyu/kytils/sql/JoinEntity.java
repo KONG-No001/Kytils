@@ -31,15 +31,17 @@ public class JoinEntity implements SqlEntity {
 
     @Override
     public String sql() {
-        StringBuilder sb = new StringBuilder();
+        return sql(new StringBuilder()).toString();
+    }
 
+    @Override
+    public StringBuilder sql(StringBuilder sb) {
         String onSql = buildOnClause();
-
         if (entity == null) {
-            return sb.append(type).append(" ").append(table).append(" ").append(onSql).toString();
+            return sb.append(type).append(" ").append(table).append(" ").append(onSql).append(" ");
         }
         else {
-            return sb.append(type).append(" ( ").append(entity.sql()).append(" ) ").append(table).append(" ").append(onSql).toString();
+            return sb.append(type).append(" ( ").append(entity.sql()).append(" ) ").append(table).append(" ").append(onSql).append(" ");
         }
     }
 
